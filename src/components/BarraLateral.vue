@@ -3,6 +3,9 @@
         <h1>
             <img src="../assets/facebook_cover_photo_1.png" alt="">
         </h1>
+        <button class="button" @click="alterarTema">
+            {{ textoBotao }}
+        </button>
     </header>
 </template>
 
@@ -10,13 +13,34 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'BarraLateral'
+    name: 'BarraLateral',
+
+    emits: ['aoTemaAlterado'],
+    data() {
+        return {
+            modoEscuroAtivo: false,
+        }
+    },
+
+    computed: {
+        textoBotao() {
+            return this.modoEscuroAtivo ? 'Desativar modo escuro' : 'Ativar modo escuro'
+        }
+    },
+
+    methods: {
+        alterarTema() {
+            this.modoEscuroAtivo = !this.modoEscuroAtivo
+            this.$emit('aoTemaAlterado', this.modoEscuroAtivo)
+        }
+    },
 })
 
 </script>
 
 <style scoped>
 header {
+    text-align: center;
     padding: 1rem;
     background: #0d3b66;
     width: 100%;
