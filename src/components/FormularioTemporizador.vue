@@ -2,28 +2,11 @@
     <div class="box">
         <div class="columns">
             <div class="column is-8" role="form" aria-label="Formulário para criação de uma nova tarefa">
-                <input type="text" class="input" placeholder="Qual tarefa você deseja iniciar?">
+                <input type="text" class="input" placeholder="Qual tarefa você deseja iniciar?" v-model="descricao">
             </div>
 
             <div class="column">
-                <div class="is-flex is-align-items-center is-justify-content-space-between">
-                    <section>
-                        <strong class="mr-6">{{ tempoDecorrido }}</strong>
-
-                        <button class="button mr-5" @click="initCount">
-                            <span class="icon">
-                                <i class="fas fa-play"></i>
-                            </span>
-                            <span>play</span>
-                        </button>
-                        <button class="button" @click="endCount">
-                            <span class="icon">
-                                <i class="fas fa-stop"></i>
-                            </span>
-                            <span>stop</span>
-                        </button>
-                    </section>
-                </div>
+                <TemporizadorBotoes @aoTemporizadorFinalizado="finalizarTarefa" />
             </div>
         </div>
     </div>
@@ -32,38 +15,37 @@
 
 <script lang="ts">
 /* eslint-disable */
-import { slotFlagsText } from '@vue/shared'
 import { defineComponent } from 'vue'
+import CronometroTempo from './CronometroTempo.vue'
+import TemporizadorBotoes from './TemporizadorBotoes.vue'
 
 export default defineComponent({
-    name: 'FormularioTemporizador',
+    name: "FormularioTemporizador",
+
+    emits: ['aoSalvarTarefa'],
 
     data() {
         return {
-            tempoEmSegundos: 0
+            descricao: ''
         }
     },
 
-    computed: {
-        tempoDecorrido() : string {
-            return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11, 8)
-        }
+    components: {
+        CronometroTempo,
+        TemporizadorBotoes
     },
 
     methods: {
-        initCount() {
-
-            setInterval(() => {
-                this.tempoEmSegundos += 1
-            }, 1000)
-
-            console.log('iniciou')
-        },
-
-        endCount() {
-            console.log('finalizou')
-        },
+        finalizarTarefa(tempoDecorrido: number): void {
+            this.$emit('aoSalvarTarefa', {
+                duracaoEmSegundos: tempoDecorrido,
+                descricao: this.descricao
+            })
+            this.descricao = ''
+        }
     },
+
+
 })
 </script>
 
