@@ -72,7 +72,6 @@ header {
         height: auto;
     }
 }
-
 .panel li {
     margin: 8px 0;
 }
