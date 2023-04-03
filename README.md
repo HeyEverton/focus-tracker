@@ -1,5 +1,9 @@
 # focus-tracker
 
+[Visit here](https://focus-tracker-eight.vercel.app/).
+
+or
+
 ## Project setup
 ```
 npm install
@@ -24,4 +28,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-or [Visit here](https://focus-tracker-eight.vercel.app/).
+
