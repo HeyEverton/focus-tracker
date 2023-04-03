@@ -1,4 +1,4 @@
-# alura-tracker
+# focus-tracker
 
 ## Project setup
 ```
@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+or [Visit here](https://focus-tracker-eight.vercel.app/).
